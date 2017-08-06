@@ -91,4 +91,5 @@ build/Release
 #--------------------
 
 # Sensitive files
+application/config/twitter.php
 application/config/database.php
