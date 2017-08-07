@@ -14,21 +14,22 @@ CREATE TABLE IF NOT EXISTS `users`(
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 -- Create syntax for table `favorites`
-CREATE TABLE `tweets` (
+CREATE TABLE IF NOT EXISTS `tweets` (
   `tweet_id` BIGINT UNSIGNED PRIMARY KEY,
   `user_id` BIGINT UNSIGNED NOT NULL,
   `text` VARCHAR(160) NOT NULL DEFAULT '',
   `published_at` DATETIME NOT NULL,
-  `created_at` DATETIME NOT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `destroyed_at` DATETIME DEFAULT NULL,
   `lang` varchar(10) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `favorites` (
-  `favorite_id` BIGINT UNSIGNED PRIMARY KEY,
+  `favorite_id` BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   `tweet_id` BIGINT UNSIGNED NOT NULL,
   `user_id` BIGINT UNSIGNED NOT NULL,
+  UNIQUE (`tweet_id`, `user_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
   FOREIGN KEY (`tweet_id`) REFERENCES `tweets`(`tweet_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
