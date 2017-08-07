@@ -16,6 +16,24 @@ class Twitter_model extends CI_Model {
         if($this->connection == NULL) {
             $this->login_twitter();
         }
-        $this->connection->get("statuses/favorites", ["count" => 25, "exclude_replies" => true]);
+
+        $default_user_data = array(
+            'user_id' => DEFAULT_USER_ID,
+            'oauth_token' => DEFAULT_USER_KEY,
+            'oauth_token_secret' => DEFAULT_USER_SECRET,
+            'token_expired_at' => "9999-12-31 23:59:59"
+        )
+        $this->db->insert('users', $default_user_data);
+        $tweets = $this->connection->get("favorites/list", ["count" => 200]);
+        $tweets_formatter = function($tweet) {
+            return array(
+                'tweet_id' => $tweet['id'],
+                'user_id' => $tweet['user']['id'],
+                'text' => $tweet['text'],
+                'published_at' => $tweet['']
+            );
+        }
+
+        $tweets = array_map()
     }
 }
