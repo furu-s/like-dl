@@ -10,6 +10,12 @@ class TwitterModel extends CI_Model {
         $this->load->database();
         $this->load->model('userModel');
     }
+
+    public function get_favorites($limit, $offset) {
+        $this->db->select("('tweet_id', )")
+        $this->db->get('favorites')
+    }
+
     public function login_twitter() {
         return $this->connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $this->userModel->getUserToken(), $this->userModel->getUserSecret());
     }
@@ -52,6 +58,20 @@ class TwitterModel extends CI_Model {
         $favorites = array_map($favorite_formatter, $raw_tweets);
         foreach($favorites as $favorite) {
             $this->db->replace('tweets', $favorite);
+        }
+
+        $media_filter = function($tweet) {
+            return property_exists($tweet->extended_entities, "media");
+        };
+        $media_formatter = function($tweet) {
+            return array(
+                'tweet_id' => $tweet->id,
+                'user_id' => $this->userModel->getUserID()
+            );
+        };
+        $media_tweets = array_filter($raw_tweets, $media_filter);
+        foreach($media_tweets as $media_tweet) {
+            foreach($media_tweet->)
         }
     }
 }
