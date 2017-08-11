@@ -3,11 +3,11 @@ import webpack from 'gulp-webpack';
 import webpackConfig from './webpack.config.js';
 
 gulp.task('start', () => {
-    gulp.watch('src/index.js', ['webpack']);
+    gulp.watch('public/src/**/*.*', ['webpack']);
 });
 
 gulp.task('webpack', () => {
-    return gulp.src('src/index.js')
+    return gulp.src('public/src/index.jsx')
        .pipe(webpack(webpackConfig))
-       .pipe(gulp.dest('dist/'));
+       .pipe(gulp.dest('js/'));
 });
