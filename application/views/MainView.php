@@ -5,7 +5,7 @@
         <title>like-dl.com</title>
     </head>
     <body>
-        <div id="root"></div>
+        <div id="react-container"></div>
     </body>
     <script src="/js/bundle.js"></script>
 </html>

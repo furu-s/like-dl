@@ -1,7 +1,13 @@
 import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import App from './app';
 
-export default function Root() {
-  return (
-    <div>Hello World</div>
-  );
+injectTapEventPlugin();
+
+export default class Root extends React.Component {
+  render() {
+    return (
+      <App />
+    );
+  }
 }
