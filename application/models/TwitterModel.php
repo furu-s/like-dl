@@ -30,7 +30,9 @@ class TwitterModel extends CI_Model {
      * @return array           取ってきたいいねの配列
      */
     public function getMedia($limit = 50, $offset = 0) {
-        $this->db->limit($limit, $offset)->select("media_id, media_thumb_url, media_url");
+        $this->db->limit($limit, $offset)
+                 ->select("media_id, media_thumb_url, media_url")
+                 ->order_by("media_id", "DESC");
         return $this->db->get('media')->result_array();
     }
 
