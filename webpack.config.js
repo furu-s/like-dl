@@ -16,5 +16,6 @@ module.exports = {
 	resolve: {
 		// ここに登録した拡張子はimport時に付ける必要がない
 		extensions: ['', '.js', '.jsx']
-	}
+	},
+  devtool: 'inline-source-map'
 }

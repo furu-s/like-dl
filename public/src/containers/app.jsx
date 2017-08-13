@@ -1,20 +1,52 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux'
 import ImageList from '../components/image-list';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {fetchSearchedTweets} from '../actions/index';
 
-export default class App extends React.Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const { dispatch, selectedSubreddit } = this.props;
+    dispatch(fetchSearchedTweets());
+  }
+
   render() {
     return (
       <MuiThemeProvider>
         <ImageList
-          mediaData={[{
-            media_thumb_url: "https:\/\/pbs.twimg.com\/media\/DGwh_bfUMAAV55H.jpg",
-            media_url: "https:\/\/pbs.twimg.com\/media\/DGwh_bfUMAAV55H.jpg",
-            media_id: 895127799534465024
-          }]}
-          isChecked={[false]}
+          mediaData={this.props.tweets}
+          isChecked={this.props.isChecked}
         />
       </MuiThemeProvider>
     )
   }
 }
+
+App.propTypes = {
+  tweets: PropTypes.array.isRequired,
+  isChecked: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+  console.log(state);
+  const {
+    tweets,
+    isChecked
+  } = state || {
+    tweets: [],
+    isChecked: []
+  };
+
+  return {
+    tweets,
+    isChecked
+  };
+}
+
+export default connect(mapStateToProps)(App);

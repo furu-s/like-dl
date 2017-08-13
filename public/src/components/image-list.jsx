@@ -6,7 +6,7 @@ import ImageTile from './image-tile';
 export default function ImageList(props) {
   return (
     <GridList
-      cellHeight={180}
+      cellHeight={300}
     >
       {props.mediaData.map((mediaData, index) => {
         return (

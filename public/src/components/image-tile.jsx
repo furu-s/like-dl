@@ -8,8 +8,14 @@ export default function ImageTile(props) {
     <GridTile
       title={props.title}
     >
-      <img src={props.mediaData.media_thumb_url} />
-      <Checkbox />
+      <div className="tile-wrapper">
+        <div className="image-tile">
+          <img className="thumb-image" src={props.mediaData.media_thumb_url} />
+        </div>
+        <div className="checkbox-wrapper">
+          <Checkbox />
+        </div>
+      </div>
     </GridTile>
   );
 }
@@ -18,7 +24,7 @@ ImageTile.propTypes = {
   mediaData: PropTypes.shape({
     media_url: PropTypes.string,
     media_thumb_url: PropTypes.string,
-    media_id: PropTypes.number
+    media_id: PropTypes.string
   }),
   isChecked: PropTypes.bool
 };
