@@ -31,7 +31,7 @@ class TwitterModel extends CI_Model {
      */
     public function getMedia($limit = 50, $offset = 0) {
         $this->db->limit($limit, $offset)->select("media_id, media_thumb_url, media_url");
-        return $this->db->get('media');
+        return $this->db->get('media')->result_array();
     }
 
     /**

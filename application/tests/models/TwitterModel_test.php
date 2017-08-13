@@ -71,7 +71,7 @@ class TwitterModelTest extends TestCase {
     }
 
     public function testGetMedia() {
-        $media_data = $this->obj->getMedia(50, 0)->result_array();
+        $media_data = $this->obj->getMedia(50, 0);
         $this->assertEquals(50, count($media_data));
         $this->assertArrayHasKey('media_id', $media_data[0]);
         $this->assertArrayHasKey('media_thumb_url', $media_data[0]);
